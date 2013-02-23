@@ -5,6 +5,7 @@ describe Guard::PHPUnit::Runner do
   let(:formatter) { Guard::PHPUnit::Formatter }
   let(:notifier)  { Guard::PHPUnit::Notifier  }
   let(:ui)        { Guard::UI                 }
+  let(:defaults)  { Guard::PHPUnit::DEFAULT_OPTIONS }
 
   describe '#run' do
     before do
@@ -47,7 +48,7 @@ describe Guard::PHPUnit::Runner do
         subject.should_receive(:execute_command).with(
           %r{^phpunit --include-path #{formatter_path} --printer PHPUnit_Extensions_Progress_ResultPrinter .+$}
         ).and_return(true)
-        subject.run( ['tests'] )
+        subject.run( ['tests'],  defaults )
       end
 
       it 'runs phpunit tests with provided command' do
@@ -138,7 +139,8 @@ describe Guard::PHPUnit::Runner do
             subject.should_receive(:execute_command).with(
               %r{^phpunit .+ #{cli_options} .+$}
             ).and_return(true)
-            subject.run( ['tests'], :cli => cli_options )
+            defaults[:cli] = cli_options
+            subject.run( ['tests'], defaults )
           end
         end
 
