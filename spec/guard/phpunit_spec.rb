@@ -23,6 +23,10 @@ describe Guard::PHPUnit do
       it 'sets a default :tests_path option' do
         subject.options[:tests_path].should == @project_path.to_s
       end
+
+      it 'sets a default :command option' do
+        subject.options[:command].should == 'phpunit'
+      end
     end
 
     context 'when other options are provided' do
@@ -31,7 +35,8 @@ describe Guard::PHPUnit do
                                           :all_after_pass => false,
                                           :keep_failed    => false,
                                           :cli            => '--colors',
-                                          :tests_path     => 'tests'     }) }
+                                          :tests_path     => 'tests',
+                                          :command        => './bin/phpunit' }) }
 
       it 'sets :all_on_start with the provided option' do
         subject.options[:all_on_start].should be_false
@@ -51,6 +56,10 @@ describe Guard::PHPUnit do
 
       it 'sets :tests_path with the provided option' do
         subject.options[:tests_path].should == 'tests'
+      end
+
+      it 'sets :command the provided option' do
+        subject.options[:command].should == './bin/phpunit'
       end
     end
 

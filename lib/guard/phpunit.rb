@@ -18,7 +18,8 @@ module Guard
       :all_after_pass => true,
       :keep_failed    => true,
       :cli            => nil,
-      :tests_path     => Dir.pwd
+      :tests_path     => Dir.pwd,
+      :command        => 'phpunit'
     }
 
     # Initialize Guard::PHPUnit.
@@ -30,6 +31,7 @@ module Guard
     # @option options [Boolean] :keep_failed remember failed tests or not
     # @option options [String] :cli The CLI arguments passed to phpunit
     # @option options [String] :tests_path the path where all tests exist
+    # @option options [String] :command the path of phpunit
     #
     def initialize(watchers = [], options = {})
       defaults = DEFAULT_OPTIONS.clone
